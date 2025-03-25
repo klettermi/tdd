@@ -30,7 +30,7 @@ class UserValidatedTest {
     @DisplayName("사용자의 id가 0 이하입니다.")
     void userValidated_Fail() {
         // given
-        long userId = -1L;
+        long userId = 0L;
         long pont = 1000L;
         long updateMillis = 2000L;
 
