@@ -45,7 +45,7 @@ class PointServiceIntegrationTest {
     }
 
     @Test
-    @DisplayName("포인트 충전 - 스프링 통합 테스트")
+    @DisplayName("포인트 충전 - 1000포인트 충전")
     void chargePointTest() {
         UserPoint charged = pointService.chargePoint(userId, 1000L);
 
@@ -57,7 +57,7 @@ class PointServiceIntegrationTest {
     }
 
     @Test
-    @DisplayName("포인트 사용 - 스프링 통합 테스트")
+    @DisplayName("포인트 사용 - 2000포인트 충전 후 800포인트 사용")
     void usePointTest() {
         pointService.chargePoint(userId, 2000L);
 
@@ -71,7 +71,7 @@ class PointServiceIntegrationTest {
     }
 
     @Test
-    @DisplayName("포인트 사용 실패 - 잔액 부족 시 예외 발생")
+    @DisplayName("포인트 사용 실패 - 0포인트 중 500 포인트 사용 시 IllegalArgumentException")
     void usePointFailTest() {
         assertThatThrownBy(() -> pointService.usePoint(userId, 500L))
                 .isInstanceOf(IllegalArgumentException.class)

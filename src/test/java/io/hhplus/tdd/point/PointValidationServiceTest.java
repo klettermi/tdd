@@ -17,7 +17,7 @@ class PointValidationServiceTest {
     }
 
     @Test
-    @DisplayName("충전 금액이 999 이하면 예외 발생")
+    @DisplayName("충전 금액이 1000 미만면 IllegalArgumentException 발생")
     void validateChargeAmountTooLow() {
         assertThatThrownBy(() -> validator.validate(999L, TransactionType.CHARGE))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -40,7 +40,7 @@ class PointValidationServiceTest {
     }
 
     @Test
-    @DisplayName("사용 금액이 99 이하면 예외 발생")
+    @DisplayName("사용 금액이 100 미만면 IllegalArgumentException 발생")
     void validateUseAmountTooLow() {
         assertThatThrownBy(() -> validator.validate(99L, TransactionType.USE))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -48,7 +48,7 @@ class PointValidationServiceTest {
     }
 
     @Test
-    @DisplayName("유효하지 않은 타입이면 예외 발생")
+    @DisplayName("유효하지 않은 타입이면 IllegalArgumentException 발생")
     void validateInvalidType() {
         TransactionType invalidType = null;
 
