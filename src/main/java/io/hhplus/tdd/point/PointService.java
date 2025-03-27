@@ -15,6 +15,7 @@ public class PointService {
 
     private final UserPointTable userPointTable;
     private final PointHistoryTable pointHistoryTable;
+    private final PointValidationService validationService;
 
     private final ConcurrentHashMap<Long, ReentrantLock> lockMap = new ConcurrentHashMap<>();
 
@@ -27,6 +28,7 @@ public class PointService {
     }
 
     public UserPoint chargePoint(long userId, long amount) {
+        validationService.validate(amount, TransactionType.CHARGE);
         ReentrantLock lock = lockMap.computeIfAbsent(userId, k -> new ReentrantLock());
         lock.lock();
         try {
@@ -45,6 +47,8 @@ public class PointService {
 
 
     public UserPoint usePoint(long userId, long amount) {
+        validationService.validate(amount, TransactionType.USE);
+
         ReentrantLock lock = lockMap.computeIfAbsent(userId, k -> new ReentrantLock());
         lock.lock();
         try {
