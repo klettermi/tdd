@@ -31,7 +31,7 @@ class PointServiceTest {
     private PointService pointService;
 
     @Test
-    @DisplayName("포인트 조회 - 사용자가 포인트 조회를 했을 때 UserPoint를 반환한다.")
+    @DisplayName("포인트 조회 - 사용자가 포인트 조회를 했을 때 UserPoint를 반환")
     void getPoint_Success() {
         // given
         long userId = 1L;
@@ -51,7 +51,7 @@ class PointServiceTest {
 
 
     @Test
-    @DisplayName("포인트 내역 조회 - 사용자가 포인트 내역을 조회했을 때 PointHistory에서 userId가 같은 값들을 반환한다.")
+    @DisplayName("포인트 내역 조회 - 사용자가 포인트 내역을 조회했을 때 PointHistory에서 userId가 같은 값들을 반환")
     void getPointHistory_Success() {
         // given
         long userId = 1L;
@@ -89,7 +89,7 @@ class PointServiceTest {
     }
 
     @Test
-    @DisplayName("포인트 충전 - 사용자가 포인트를 충전 시 UserPoint에 충전된 금액으로 수정해준 후, PointHistory에 저장한다.")
+    @DisplayName("포인트 충전 - 사용자가 포인트를 충전 시 UserPoint에 충전된 금액으로 수정해준 후, PointHistory에 저장")
     void chargePoint_Success() {
         // given
         long id = 1L;
@@ -116,7 +116,7 @@ class PointServiceTest {
     }
 
     @Test
-    @DisplayName("포인트 사용 - 사용자가 포인트를 사용할 때 UserPoint에 사용된 금액으로 수정하고, PointHistory에 내역을 저장한다.")
+    @DisplayName("포인트 사용 - 사용자가 포인트를 사용할 때 UserPoint에 사용된 금액으로 수정하고, PointHistory에 내역을 저장")
     void usePoint_Success() {
         // given
         long id = 1L;
@@ -139,7 +139,7 @@ class PointServiceTest {
     }
 
     @Test
-    @DisplayName("포인트 사용 - 사용자가 포인트를 초과하여 사용할 때 IllegalArgumentException을 throw한다.")
+    @DisplayName("포인트 사용 - 사용자가 포인트를 초과하여 사용할 때 IllegalArgumentException을 throw")
     void usePoint_InsufficientBalance_Fail() {
         // given
         long id = 1L;

@@ -34,7 +34,7 @@ class PointServiceIntegrationTest {
     }
 
     @Test
-    @DisplayName("포인트 조회 - 스프링 통합 테스트")
+    @DisplayName("포인트 조회")
     void getPointTest() {
         userPointTable.insertOrUpdate(userId, 500L);
 

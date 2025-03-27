@@ -37,7 +37,7 @@ class PointServiceConcurrencyIntegrationTest {
 
 
     @Test
-    @DisplayName("멀티스레드 환경에서 동시 포인트 충전 - 데이터 일관성 보장")
+    @DisplayName("100번씩 1000포인트 충전 시 100_000포인트 충전")
     void chargePoint_Concurrent() throws InterruptedException {
         int threadCount = 100;
         long amount = 1000L;
@@ -64,7 +64,7 @@ class PointServiceConcurrencyIntegrationTest {
     }
 
     @Test
-    @DisplayName("멀티스레드 환경에서 포인트 사용 - 일관성 보장")
+    @DisplayName("100번씩 100포인트 사용 시 10_000")
     void usePoint_Concurrent() throws InterruptedException {
         int threadCount = 100;
         long amount = 100L;
