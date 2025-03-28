@@ -8,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class PointServiceTest {
     @Mock
     private UserPointTable userPointTable;
@@ -27,11 +29,14 @@ class PointServiceTest {
     @Mock
     private PointHistoryTable pointHistoryTable;
 
+    @Mock
+    PointValidationService validationService;
+
     @InjectMocks
     private PointService pointService;
 
     @Test
-    @DisplayName("포인트 조회 - 사용자가 포인트 조회를 했을 때 UserPoint를 반환")
+    @DisplayName("포인트 조회 - 사용자가 포인트 조회를 했을 때 UserPoint를 반환한다.")
     void getPoint_Success() {
         // given
         long userId = 1L;
@@ -51,7 +56,7 @@ class PointServiceTest {
 
 
     @Test
-    @DisplayName("포인트 내역 조회 - 사용자가 포인트 내역을 조회했을 때 PointHistory에서 userId가 같은 값들을 반환")
+    @DisplayName("포인트 내역 조회 - 사용자가 포인트 내역을 조회했을 때 PointHistory에서 userId가 같은 값들을 반환한다.")
     void getPointHistory_Success() {
         // given
         long userId = 1L;
@@ -89,7 +94,7 @@ class PointServiceTest {
     }
 
     @Test
-    @DisplayName("포인트 충전 - 사용자가 포인트를 충전 시 UserPoint에 충전된 금액으로 수정해준 후, PointHistory에 저장")
+    @DisplayName("포인트 충전 - 사용자가 포인트를 충전 시 UserPoint에 충전된 금액으로 수정해준 후, PointHistory에 저장한다.")
     void chargePoint_Success() {
         // given
         long id = 1L;
@@ -116,7 +121,7 @@ class PointServiceTest {
     }
 
     @Test
-    @DisplayName("포인트 사용 - 사용자가 포인트를 사용할 때 UserPoint에 사용된 금액으로 수정하고, PointHistory에 내역을 저장")
+    @DisplayName("포인트 사용 - 사용자가 포인트를 사용할 때 UserPoint에 사용된 금액으로 수정하고, PointHistory에 내역을 저장한다.")
     void usePoint_Success() {
         // given
         long id = 1L;
@@ -139,7 +144,7 @@ class PointServiceTest {
     }
 
     @Test
-    @DisplayName("포인트 사용 - 사용자가 포인트를 초과하여 사용할 때 IllegalArgumentException을 throw")
+    @DisplayName("포인트 사용 - 사용자가 포인트를 초과하여 사용할 때 IllegalArgumentException을 throw한다.")
     void usePoint_InsufficientBalance_Fail() {
         // given
         long id = 1L;
