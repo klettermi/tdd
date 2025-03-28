@@ -7,12 +7,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class PointServiceIntegrationTest {
 
     @Autowired
@@ -28,13 +30,11 @@ class PointServiceIntegrationTest {
 
     @BeforeEach
     void setUp() {
-        userPointTable.clear();
-        pointHistoryTable.clear();
         userPointTable.insertOrUpdate(userId, 0L);
     }
 
     @Test
-    @DisplayName("포인트 조회")
+    @DisplayName("포인트 조회 - 스프링 통합 테스트")
     void getPointTest() {
         userPointTable.insertOrUpdate(userId, 500L);
 
@@ -45,7 +45,7 @@ class PointServiceIntegrationTest {
     }
 
     @Test
-    @DisplayName("포인트 충전 - 1000포인트 충전")
+    @DisplayName("포인트 충전 - 스프링 통합 테스트")
     void chargePointTest() {
         UserPoint charged = pointService.chargePoint(userId, 1000L);
 
@@ -57,7 +57,7 @@ class PointServiceIntegrationTest {
     }
 
     @Test
-    @DisplayName("포인트 사용 - 2000포인트 충전 후 800포인트 사용")
+    @DisplayName("포인트 사용 - 스프링 통합 테스트")
     void usePointTest() {
         pointService.chargePoint(userId, 2000L);
 
@@ -71,7 +71,7 @@ class PointServiceIntegrationTest {
     }
 
     @Test
-    @DisplayName("포인트 사용 실패 - 0포인트 중 500 포인트 사용 시 IllegalArgumentException")
+    @DisplayName("포인트 사용 실패 - 잔액 부족 시 예외 발생")
     void usePointFailTest() {
         assertThatThrownBy(() -> pointService.usePoint(userId, 500L))
                 .isInstanceOf(IllegalArgumentException.class)

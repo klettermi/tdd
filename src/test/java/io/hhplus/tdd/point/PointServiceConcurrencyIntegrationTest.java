@@ -22,8 +22,6 @@ class PointServiceConcurrencyIntegrationTest {
     @Autowired
     UserPointTable userPointTable;
 
-    @Autowired
-    PointHistoryTable pointHistoryTable;
 
     long chargeUserId = 1L;
     long useUserId = 2L;
@@ -32,7 +30,6 @@ class PointServiceConcurrencyIntegrationTest {
     void setUp() {
         userPointTable.insertOrUpdate(chargeUserId, 0L);
         userPointTable.insertOrUpdate(useUserId, 10_000L);
-        pointHistoryTable.clear();
     }
 
 
